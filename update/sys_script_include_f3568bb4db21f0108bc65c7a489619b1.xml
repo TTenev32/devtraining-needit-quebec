@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_58872_needit.CreateRecords</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Creates a shedload of users</description>
+        <name>CreateRecords</name>
+        <script><![CDATA[var CreateRecords = Class.create();
+CreateRecords.prototype = {
+    initialize: function() {
+var needGR = new GlideRecord('x_58872_needit_needit');
+
+
+
+var userArray = [];
+var ruquestType = ['Human Resources', 'Legal', 'Facilities'];
+var userGR = new GlideRecord('sys_user');
+
+
+userGR.addQuery('active', true);
+userGR.setLimit(8);
+userGR.query();
+
+while(userGR.next()){
+  userArray.push(userGR.getUniqueValue());
+}
+
+
+
+//gs.info(userArray[random]);
+
+//gs.info(random);
+
+//gs.info(ruquestType[reqRandom]);
+
+//gs.info(ruquestType[reqRandom]+' '+1);
+
+//gs.info(gs.beginningOfNextMonth());
+
+
+for (var i = 0; i< 20; i++){
+var random = Math.floor(Math.random() * 8);
+var reqRandom = Math.floor(Math.random() * 3);
+needGR.newRecord();
+
+needGR.u_requested_for = userArray[random];
+needGR.u_request_type = ruquestType[reqRandom];
+needGR.state = 'Requested';
+needGR.u_what_needed = ruquestType[reqRandom] +' '+1;
+needGR.u_when_needed = gs.beginningOfNextMonth();
+needGR.u_requested_for_email = userArray[random] + '@123.com';
+
+needGR.insert();
+}
+    },
+
+    type: 'CreateRecords'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-22 11:31:57</sys_created_on>
+        <sys_id>f3568bb4db21f0108bc65c7a489619b1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CreateRecords</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_f3568bb4db21f0108bc65c7a489619b1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-22 11:31:57</sys_updated_on>
+    </sys_script_include>
+</record_update>
